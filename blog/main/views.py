@@ -77,7 +77,7 @@ def api_subscribe(request):
     return JsonResponse(data, safe=False)
 
 
-def api_author(request):
+def api_authors(request):
     all = Author.objects.all()
     data = list(all.values())
 

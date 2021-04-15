@@ -21,6 +21,9 @@ class Subscriber(models.Model):
 
     email_to = models.EmailField("Email подписчика")
     author_id = models.ForeignKey("Author", on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(default=now)
+
 
     def __str__(self):
         return self.email_to
