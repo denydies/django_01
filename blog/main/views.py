@@ -1,11 +1,11 @@
 from django.http import JsonResponse
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 
-from .forms import PostForm
-from .models import Post
-# from .notify_service import notify
-# from  .post_service import
-# from .subscribe_service import subscriber
+from .forms import PostForm, SubscriberForm
+from .models import Post, Author, Subscriber
+# from blog.main.subscribe_service import subs_add
+
+
 
 
 def index(request):
@@ -19,6 +19,11 @@ def about(request):
 def posts(request):
     posts = Post.objects.all()
     return render(request, 'main/post.html', {"title": "Posts", "posts": posts})
+
+
+def subscribers(request):
+    subs = Subscriber.objects.all()
+    return render(request, 'main/subscribers.html', {"title": "Subscribers", "subs": subs})
 
 
 def post_create(request):
@@ -39,6 +44,25 @@ def post_create(request):
     return render(request, 'main/post_create.html', context=context)
 
 
+# функция должна быть тонкой( логику  перенести в СЕРВИСЫ)
+def subscriber_add(request):
+    error = ""
+    if request.method == "POST":
+        form = SubscriberForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('subscribers')
+        else:
+            error = 'Error on save Subscribe'
+    else:
+        form = SubscriberForm()
+    context = {
+        'form': form,
+        'err': error
+    }
+    return render(request, 'main/subscribe_add.html', context=context)
+
+
 def api_posts(request):
     every = Post.objects.all()
     data = list(every.values())
@@ -46,27 +70,15 @@ def api_posts(request):
     return JsonResponse(data, safe=False)
 
 
-# def api_subscribe(request):
-#     author_id = request.GET['author_id']
-#     email_to = request.GET['email_to']
+def api_subscribe(request):
+    sup = Subscriber.objects.all()
+    data = list(sup.values())
 
-    # get_object_or_404(Author, pk=author_id)
-    #
-    # subscribe_process(author_id, email_to)
+    return JsonResponse(data, safe=False)
 
-    # data = {'author_id': author_id}
-    # return JsonResponse(data, safe=False)
 
-#
-# def subscribe(request):
-#     author_id = request.GET['author_id']
-#     email_to = request.GET['email_to']
-#
-#     subscribe_process(author_id, email_to)
-#
-#     return render(request, 'main/subscribe.html', context=context)
-#
-#
-# def subscribe_process(author_id, email_to):
-#     subscribe(author_id, email_to)
-#     # notify(email_to)
+def api_authors(request):
+    all = Author.objects.all()
+    data = list(all.values())
+
+    return JsonResponse(data, safe=False)

@@ -5,20 +5,21 @@
 {% endblock %}
 {% block content%}
 
+
 <div class="content">
 
-    <h1>Создать пост</h1>
+    <h1>Подписаться на Автора</h1>
 
     <div class="payload">
         <form method="POST">
             {% csrf_token %}
 
-            {{ form.title }}
-            {{ form.description }}
-            {{ form.content }}
+            {{ form.email_to }}
+            <br>
+            {{ form.author_id }}
 
             <br>
-            <button class="btn btn-lg btn-danger">Сохранить</button>
+            <button class="btn btn-lg btn-danger">Подписаться</button>
         </form>
     </div>
 </div>

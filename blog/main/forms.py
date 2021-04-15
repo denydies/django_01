@@ -1,6 +1,6 @@
 from django.forms import ModelForm, Textarea, TextInput
 
-from .models import Post
+from .models import Post, Subscriber
 
 
 class PostForm(ModelForm):
@@ -22,18 +22,18 @@ class PostForm(ModelForm):
             })
         }
 
-#
-# class SubscriberForm(ModelForm):
-#     class Meta:
-#         model = Subscriber
-#         fields = ["author_to", "email_to"]
-#         widgets = {
-#             "author_to": TextInput(attrs={
-#                 "class": "form-control",
-#                 "placeholder": "Id автора",
-#             }),
-#             "email_to": TextInput(attrs={
-#                 "class": "form-control",
-#                 "placeholder": "Email подписчика",
-#             })
-#         }
+
+class SubscriberForm(ModelForm):
+    class Meta:
+        model = Subscriber
+        fields = ["email_to", "author_id"]
+        widgets = {
+            "email_to": TextInput(attrs={
+                "class": "form-control",
+                "placeholder": "Email подписчика",
+            }),
+            "author_id": TextInput(attrs={
+                "class": "form-control",
+                "placeholder": "ID автора",
+            })
+        }
