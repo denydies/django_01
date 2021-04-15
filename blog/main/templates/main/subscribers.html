@@ -5,24 +5,26 @@
 {% endblock %}
 {% block content%}
 
+
 <div class="content">
 
-    <h1>Посты</h1>
+    <h1>Все подписки</h1>
 
     <div class="payload">
         <ul>
-            {% for post in posts %}
+            {% for SUB in subs %}
             <br>
-            <h4>{{ post.title }}</h4>
+            <h4>{{ SUB.email_to }}</h4>
                 <li class="row">
-                    {{ post.content }}
+                    {{ SUB.author_id }}
                 </li>
                 <hr>
-                <button class="btn btn-lg btn-danger">Редактировать</button>
-            <br>
+<!--                <button class="btn btn-lg btn-danger">Редактировать</button>-->
+<!--            <br>-->
             {% endfor %}
         </ul>
     </div>
 </div>
+
 
 {% endblock%}

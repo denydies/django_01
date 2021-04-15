@@ -15,11 +15,12 @@
 
 <nav>
     <ul>
-        <li><a href="{% url 'home_page' %}">Main page</a></li>
-        <li><a href="{% url 'about' %}">About</a></li>
-        <li><a href="{% url 'posts' %}">Posts</a></li>
-        <li><a href="{% url 'posts_create' %}">Post_create</a></li>
-
+        <li><a href="{% url 'home_page' %}">ГЛАВНАЯ</a></li>
+        <li><a href="{% url 'about' %}">О нас</a></li>
+        <li><a href="{% url 'posts' %}">Посты</a></li>
+        <li><a href="{% url 'posts_create' %}">Создать пост</a></li>
+        <li><a href="{% url 'subscribers' %}">Все подписки</a></li>
+        <li><a href="{% url 'subscriber_add' %}">Подписаться на Автора</a></li>
     </ul>
 </nav>
 {% block content %}{% endblock %}
