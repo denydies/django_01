@@ -10,11 +10,16 @@
     <h1>{{ title}}</h1>
     <div class="payload">
         <span class="grey summary">{{ pst.description }}</span>
+        <div>
+            {{ post.content }}
+        </div>
+        <br>
         <div class="update link">
             <a href="{% url 'post_update' post_id=post.id %}">Редактировать</a>
         </div>
-        <div>
-            {{ post.content }}
+        <br>
+        <div class="update link">
+            <a href="{% url 'comment_create' %}">Комментировать</a>
         </div>
     </div>
 </div>

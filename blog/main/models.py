@@ -7,11 +7,26 @@ class Author(models.Model):
         verbose_name = "Автор"
         verbose_name_plural = "Авторы"
 
-    name = models.CharField('Имя автора', max_length=100)
-    email = models.EmailField('Email автора', max_length=50)
+    name = models.CharField('Имя автора', max_length=100, null=True)
+    # last_name = models.CharField('Фамилия автора', max_length=100 , null=True)
+    email = models.EmailField('Email автора', max_length=50, null=True)
 
     def __str__(self):
         return self.name
+    #
+    # def get_full_name(self):
+    #     return f'{self.name} {self.last_name}'
+    #
+    # @property
+    # def full_name(self):
+    #     return f'{self.name} {self.last_name}'
+    #
+    # def save(self, *args, **kwargs):
+    #     print('Author BEFORE save')
+    #     self.name = self.name.lover() + ' [name author]'
+    #     self.email = self.email + ' [ author email]'
+    #     super().save(*args, **kwargs)
+    #     print('Author AFTER save')
 
 
 class Subscriber(models.Model):
@@ -41,3 +56,13 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Comment(models.Model):
+    class Meta:
+        verbose_name = "Комментарий"
+        verbose_name_plural = "Комментарии"
+
+    content = models.TextField('Введите комментарий')
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(default=now)

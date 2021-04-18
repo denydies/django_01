@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm, Textarea, TextInput, Select
 
-from .models import Post, Subscriber, Author
+from .models import Post, Subscriber, Author, Comment
 
 
 class PostForm(ModelForm):
@@ -45,4 +45,16 @@ class SubscriberForm(ModelForm):
             #     "class": "form-control",
             #     "placeholder": "ID автора",
             # })
+        }
+
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ["content"]
+        widgets = {
+            "content": Textarea(attrs={
+                "class": "form-control",
+                "placeholder": "Введите комментарий",
+            })
         }

@@ -2,8 +2,8 @@ from django.http import JsonResponse
 from django.shortcuts import redirect, render, get_object_or_404
 from faker import Faker
 
-from .forms import PostForm, SubscriberForm
-from .models import Post, Author, Subscriber
+from .forms import PostForm, SubscriberForm, CommentForm
+from .models import Post, Author, Subscriber, Comment
 
 
 # def index(request):
@@ -11,7 +11,12 @@ from .models import Post, Author, Subscriber
 
 
 # def about(request):
-#     return render(request, 'main/about.html', {"title": "About company"})
+#     return render(request, 'main/about.html', {"title": "About company"})x
+
+
+def comments(request):
+    comments = Comment.objects.all()
+    return render(request, 'main/comments.html', {"title": "Comments", "comments": comments})
 
 
 def posts(request):
@@ -60,6 +65,24 @@ def post_update(request, post_id):
         'err': err
     }
     return render(request, 'main/post_update.html', context=context)
+
+
+def comment_create(request):
+    err = ""
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('post_show')
+        else:
+            err = 'Error on save Comment'
+    else:
+        form = CommentForm()
+    context = {
+        'form': form,
+        'err': err
+    }
+    return render(request, 'main/comment_create.html', context=context)
 
 
 def subscribers(request):
