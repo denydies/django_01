@@ -11,4 +11,10 @@ migrate:
 
 
 lint:
-	flake8 .
+	flake8 ./blog
+
+check:
+	python blog/manage.py check
+
+check-migrate:
+	python blog/manage.py makemigrations --check --dry-run

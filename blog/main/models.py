@@ -24,7 +24,6 @@ class Subscriber(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(default=now)
 
-
     def __str__(self):
         return self.email_to
 

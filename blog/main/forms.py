@@ -1,6 +1,7 @@
-from django.forms import ModelForm, Textarea, TextInput
+from django import forms
+from django.forms import ModelForm, Textarea, TextInput, Select
 
-from .models import Post, Subscriber
+from .models import Post, Subscriber, Author
 
 
 class PostForm(ModelForm):
@@ -24,6 +25,14 @@ class PostForm(ModelForm):
 
 
 class SubscriberForm(ModelForm):
+    author_id = forms.ModelChoiceField(
+        queryset=Author.objects.all().order_by('name'),
+        empty_label='Выберите автора...',
+        widget=forms.Select(attrs={
+            "class": "form-control",
+        }),
+    )
+
     class Meta:
         model = Subscriber
         fields = ["email_to", "author_id"]
@@ -32,8 +41,8 @@ class SubscriberForm(ModelForm):
                 "class": "form-control",
                 "placeholder": "Email подписчика",
             }),
-            "author_id": TextInput(attrs={
-                "class": "form-control",
-                "placeholder": "ID автора",
-            })
+            # "author_id": Select(attrs={
+            #     "class": "form-control",
+            #     "placeholder": "ID автора",
+            # })
         }
