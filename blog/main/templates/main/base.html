@@ -5,9 +5,10 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css">
-    <title>{% block title %}{% endblock %}</title>
     {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <title>{% block title %}{% endblock %}</title>
     <link rel="apple-touch-icon" sizes="57x57" href="{% static 'assets/img/favicon' %}/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="{% static 'assets/img/favicon' %}/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="{% static 'assets/img/favicon' %}/apple-icon-72x72.png">
@@ -17,33 +18,39 @@
     <link rel="apple-touch-icon" sizes="144x144" href="{% static 'assets/img/favicon' %}/apple-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="152x152" href="{% static 'assets/img/favicon' %}/apple-icon-152x152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/img/favicon' %}/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="{% static 'assets/img/favicon' %}/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="{% static 'assets/img/favicon' %}/android-icon-192x192.png">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/img/favicon' %}/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="{% static 'assets/img/favicon' %}/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/img/favicon' %}/favicon-16x16.png">
     <link rel="manifest" href="{% static 'assets/img/favicon' %}/manifest.json">
+    <link rel="stylesheet" href="{% static 'assets/css/main.css' %}"/>
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
 </head>
 <body>
 
+    <aside>
+        <nav>
+            <h3>Навигация</h3>
+            <ul>
+                <li><a href="{% url 'home_page' %}"><i class="fas fa-home"></i> ГЛАВНАЯ</a></li>
+                <li><a href="{% url 'about' %}"><i class="fas fa-address-card"></i> О нас</a></li>
+                <li><a href="{% url 'posts' %}"><i class="fas fa-file-alt"></i> Посты</a></li>
+                <li><a href="{% url 'posts_create' %}"><i class="fas fa-pen"></i> Создать пост</a></li>
+                <li><a href="{% url 'subscribers' %}"><i class="fas fa-users"></i> Все подписчики</a></li>
+                <li><a href="{% url 'subscriber_add' %}"><i class="fas fa-hand-point-up"></i> Подписаться на Автора</a></li>
+                <li><a href="{% url 'authors_all' %}"><i class="fas fa-users"></i> Все авторы</a></li>
+                <li><a href="{% url 'authors_new' %}"><i class="fas fa-sync-alt"></i> Генератор автора</a></li>
+                <li><a href="{% url 'comments' %}">Комментарии</a></li>
+            </ul>
+    </nav>
+    </aside>
 
+    <main>
+        {% block content %}{% endblock %}
+    </main>
 
-
-<nav>
-    <ul>
-        <li><a href="{% url 'home_page' %}">ГЛАВНАЯ</a></li>
-        <li><a href="{% url 'about' %}">О нас</a></li>
-        <li><a href="{% url 'posts' %}">Посты</a></li>
-        <li><a href="{% url 'posts_create' %}">Создать пост</a></li>
-        <li><a href="{% url 'subscribers' %}">Все подписчики</a></li>
-        <li><a href="{% url 'subscriber_add' %}">Подписаться на Автора</a></li>
-        <li><a href="{% url 'authors_all' %}">Все авторы</a></li>
-        <li><a href="{% url 'authors_new' %}">Генератор автора</a></li>
-    </ul>
-</nav>
-{% block content %}{% endblock %}
 
 </body>
 </html>

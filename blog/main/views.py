@@ -1,9 +1,17 @@
+from time import sleep, time
+from django.core.exceptions import ValidationError
+from django.forms import model_to_dict
 from django.http import JsonResponse
 from django.shortcuts import redirect, render, get_object_or_404
+from django.urls import reverse
 from faker import Faker
 
 from .forms import PostForm, SubscriberForm, CommentForm
 from .models import Post, Author, Subscriber, Comment
+from .services import notify_service
+# from .post_service import post_all, post_find
+# from .subscribe_service import subscribe
+from .tasks import noyify_async
 
 
 # def index(request):
@@ -15,13 +23,13 @@ from .models import Post, Author, Subscriber, Comment
 
 
 def comments(request):
-    comments = Comment.objects.all()
-    return render(request, 'main/comments.html', {"title": "Comments", "comments": comments})
+    all = Comment.objects.all()
+    return render(request, 'main/comments.html', {"title": "Comments", "comments": all})
 
 
 def posts(request):
     posts = Post.objects.all()
-    return render(request, 'main/post.html', {"title": "Posts", "posts": posts})
+    return render(request, 'main/posts.html', {"title": "Posts", "posts": posts})
 
 
 def post_create(request):
@@ -73,9 +81,9 @@ def comment_create(request):
         form = CommentForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('post_show')
+            return redirect('comments')
         else:
-            err = 'Error on save Comment'
+            err = 'Ошибка при сохранении комментария'
     else:
         form = CommentForm()
     context = {
@@ -93,15 +101,30 @@ def subscribers(request):
 # функция должна быть тонкой( логику  перенести в СЕРВИСЫ)
 def subscriber_add(request):
     error = ""
+    subscribe_success = False
+    email_to = request.POST.get('email_to')
+    author_name = request.POST.get('author id')
+    # author_id = request.POST.get('author_id')
+    # author_name = Author.objects.get(id=author_id)
+
     if request.method == "POST":
         form = SubscriberForm(request.POST)  # ВЫТАЩИТЬ В ОТДВВЕЛЬНЫЙ СЕРВИС
-        if form.is_valid():  # ВЫТАЩИТЬ В ОТДВВЕЛЬНЫЙ СЕРВИС
-            form.save()  # ВЫТАЩИТЬ В ОТДВВЕЛЬНЫЙ СЕРВИС
-            return redirect('subscribers')  # ВЫТАЩИТЬ В ОТДВВЕЛЬНЫЙ СЕРВИС
-        else:
-            error = 'Error on save Subscribe'
+        try:
+            if form.is_valid():  # ВЫТАЩИТЬ В ОТДВВЕЛЬНЫЙ СЕРВИС
+                form.save()  # ВЫТАЩИТЬ В ОТДВВЕЛЬНЫЙ СЕРВИС
+                # return redirect('subscribers')  # ВЫТАЩИТЬ В ОТДВВЕЛЬНЫЙ СЕРВИС
+                subscribe_success = True
+            else:
+                error = form.errors
+        except ValidationError:
+            error = 'Already subscribed'
     else:
         form = SubscriberForm()
+
+    if subscribe_success:
+        noyify_async.delay(email_to, author_name)
+        return redirect('subscribers')
+
     context = {
         'form': form,
         'err': error
@@ -123,6 +146,13 @@ def authors_all(request):
 def api_posts(request):
     every = Post.objects.all()
     data = list(every.values())
+
+    return JsonResponse(data, safe=False)
+
+
+def api_comments(request):
+    all = Comment.objects.all()
+    data = list(all.values())
 
     return JsonResponse(data, safe=False)
 

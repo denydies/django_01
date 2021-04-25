@@ -51,9 +51,9 @@ class SubscriberForm(ModelForm):
 class CommentForm(ModelForm):
     class Meta:
         model = Comment
-        fields = ["content"]
+        fields = ["content_com"]
         widgets = {
-            "content": Textarea(attrs={
+            "content_com": Textarea(attrs={
                 "class": "form-control",
                 "placeholder": "Введите комментарий",
             })

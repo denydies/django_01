@@ -8,7 +8,7 @@ class Author(models.Model):
         verbose_name_plural = "Авторы"
 
     name = models.CharField('Имя автора', max_length=100, null=True)
-    # last_name = models.CharField('Фамилия автора', max_length=100 , null=True)
+    # last_name = models.CharField('Фамилия автора', max_length=100, null=True)
     email = models.EmailField('Email автора', max_length=50, null=True)
 
     def __str__(self):
@@ -63,6 +63,20 @@ class Comment(models.Model):
         verbose_name = "Комментарий"
         verbose_name_plural = "Комментарии"
 
-    content = models.TextField('Введите комментарий')
+    content_com = models.TextField('Введите комментарий')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(default=now)
+
+    def __str__(self):
+        return self.content_com
+
+
+# class Logger(models.Model):
+#     class Meta:
+#         verbose_name = "Логи"
+#
+#     created = models.DateTimeField(auto_now_add=True)
+#     time_exec = models.CharField('time execution')
+#     # path-request.path =
+#     utm = models.CharField('utm metka', max_length=50)
+#     # ip_user = models.

@@ -11,6 +11,9 @@
     <h1>Подписаться на Автора</h1>
 
     <div class="payload">
+        <div class="err">
+            {{ form.errors }}
+        </div>
         <form method="POST">
             {% csrf_token %}
 
