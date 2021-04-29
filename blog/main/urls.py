@@ -13,6 +13,7 @@ urlpatterns = [
     path('about/', TemplateView.as_view(template_name='main/about.html'), name='about'),
 
     path('posts/', views.posts, name='posts'),
+    path('posts/list/', views.PostsListView.as_view(), name='posts_list'),
     path('posts/create/', views.post_create, name='posts_create'),
     path('post/<int:post_id>/', views.post_show, name='post_show'),
     path('post/update/<int:post_id>/', views.post_update, name='post_update'),
@@ -30,5 +31,10 @@ urlpatterns = [
     path('api/authors/', views.api_authors, name='api_authors'),
     path('api/authors/new/', views.api_authors_new, name='api_authors_new'),
     path('api/comments/', views.api_comments, name='api_api_comments'),
+
+
+    path('contact/us/create/', views.ContactUsView.as_view(), name='contact-us-create'),
+    path('contact/us/list/', views.ContactUsListView.as_view(), name='contact-us-list'),
+
 
 ]

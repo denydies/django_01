@@ -1,14 +1,12 @@
-from time import sleep, time
 from django.core.exceptions import ValidationError
-from django.forms import model_to_dict
 from django.http import JsonResponse
 from django.shortcuts import redirect, render, get_object_or_404
-from django.urls import reverse
+from django.urls import reverse_lazy
 from faker import Faker
 
 from .forms import PostForm, SubscriberForm, CommentForm
-from .models import Post, Author, Subscriber, Comment
-from .services import notify_service
+from .models import Post, Author, Subscriber, Comment, ContactUs
+
 # from .post_service import post_all, post_find
 # from .subscribe_service import subscribe
 from .tasks import noyify_async
@@ -186,3 +184,28 @@ def api_authors_new(request):
 
 def post_find(post_id: int) -> Post:
     return Post.objects.get(id=post_id)
+
+
+# Классовые вью
+
+
+# class BooksListView(ListView):
+#     queryset = Book.objects.all()
+
+from django.views.generic import ListView, CreateView
+
+
+class PostsListView(ListView):
+    queryset = Post.objects.all()
+    template_name = 'main/posts_list.html'
+
+
+class ContactUsListView(ListView):
+    queryset = ContactUs.objects.all()
+    template_name = 'main/contact-us-list.html'
+
+
+class ContactUsView(CreateView):
+    success_url = reverse_lazy('contact-us-list')
+    model = ContactUs
+    fields = ('email', 'subject', 'message')

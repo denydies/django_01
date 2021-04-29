@@ -36,12 +36,12 @@ CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
 
 # celery -A blog beat -l info
-CELERY_BEAT_SCHEDULE = {
-    'subscribe_notify_beat': {
-        'task': 'main.tasks.subscribe_notify_beat',
-        'schedule': crontab(hour='09')
-    },
-}
+# CELERY_BEAT_SCHEDULE = {
+#     'subscribe_notify_beat': {
+#         'task': 'main.tasks.subscribe_notify_beat',
+#         'schedule': crontab(hour='09')
+#     },
+# }
 # APPEND_SLASH = True
 
 # Application definition

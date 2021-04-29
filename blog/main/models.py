@@ -80,3 +80,12 @@ class Comment(models.Model):
 #     # path-request.path =
 #     utm = models.CharField('utm metka', max_length=50)
 #     # ip_user = models.
+
+
+class ContactUs(models.Model):
+    email = models.EmailField()
+    subject = models.CharField(max_length=120)
+    message = models.TextField()
+
+    def __str__(self):
+        return self.email

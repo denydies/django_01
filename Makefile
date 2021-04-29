@@ -23,7 +23,7 @@ shell_plus:
 	python blog/manage.py shell_plus --print-sql
 
 #celery:
-#	python celery -A blog worker -l info
+	# celery -A blog worker -l info
 #
 #celery_autoscale:
 #		celery -A blog worker --autoscale=4,2 -l info
