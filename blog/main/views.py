@@ -1,7 +1,10 @@
+import csv
+
 from django.core.exceptions import ValidationError
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse_lazy
+from django.views import View
 from faker import Faker
 
 from .forms import PostForm, SubscriberForm, CommentForm
@@ -51,7 +54,6 @@ def post_create(request):
 def post_show(request, post_id):
     post = post_find(post_id)
     return render(request, 'main/post_show.html', {"title": post.title, "post": post})
-    pass
 
 
 def post_update(request, post_id):
@@ -192,7 +194,17 @@ def post_find(post_id: int) -> Post:
 # class BooksListView(ListView):
 #     queryset = Book.objects.all()
 
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DeleteView
+
+
+def post_delete(request, post_id):
+    post = Post.objects.get(id=post_id)
+    post.delete()
+    return render(request, 'main/posts.html')
+
+# class PostDeleteView(DeleteView):
+#     success_url = 'posts/'
+#     tamplate_name = 'main/post_delete.html'
 
 
 class PostsListView(ListView):
@@ -209,3 +221,30 @@ class ContactUsView(CreateView):
     success_url = reverse_lazy('contact-us-list')
     model = ContactUs
     fields = ('email', 'subject', 'message')
+
+
+def display_attr(obj, atrr: str):
+    get_display = f'get_{atrr}_display'
+    if hasattr(obj, get_display):
+        return getattr(obj, get_display)()
+
+    return getattr(obj, atrr)
+
+
+class PostXLSX(View):
+    headers = ['title']
+    filename = 'posts_all_list.xlsx'
+
+    def get(self, request, *args, **kwargs):
+        response = HttpResponse(
+            content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            headers={'Content-Disposition': f'attachment; filename="{self.filename}"'},
+        )
+
+        writer = csv.writer(response)
+
+        writer.writerow(self.headers)
+        for post in Post.objects.all().iterator():
+            writer.writerow([display_attr(post, header) for header in self.headers])
+
+        return response

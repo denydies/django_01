@@ -51,6 +51,7 @@ class Post(models.Model):
     title = models.CharField('Заголовок', max_length=150)
     description = models.CharField('Краткое описание', max_length=250)
     content = models.TextField('Статья')
+
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(default=now)
 
@@ -80,7 +81,7 @@ class Comment(models.Model):
 #     # path-request.path =
 #     utm = models.CharField('utm metka', max_length=50)
 #     # ip_user = models.
-
+#
 
 class ContactUs(models.Model):
     email = models.EmailField()

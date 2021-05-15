@@ -57,7 +57,10 @@ INSTALLED_APPS = [
     'django_extensions',
     'debug_toolbar',
     'main',
+    'account',
 ]
+
+AUTH_USER_MODEL = 'account.user'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

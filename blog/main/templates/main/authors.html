@@ -33,6 +33,11 @@
                 <td scope="row">{{ author.id }}</td>
                 <td>{{ author.name }}</td>
                 <td>[{{ author.email }}]</td>
+                {% if request.user.is_authenticated %}
+                <td><a href="#">Удалить автора</a></td>
+                {% endif %}
+
+
             </tr>
             {% endfor %}
             </tbody>

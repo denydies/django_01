@@ -48,7 +48,6 @@
     </style>
 </head>
 <body>
-
 <aside>
 
 
@@ -91,16 +90,12 @@
             <li><a href="{% url 'posts_list' %}">Posts_List</a></li>
             <li><a href="{% url 'contact-us-create' %}">ContactUS</a></li>
             <li><a href="{% url 'contact-us-list' %}">ContactUS_List</a>
-            <li><a href="{% url 'posts_list_csv' %}">Выгрузка постов в CSV</a></li>
-            {% if request.user.is_authenticated %}
-            <li><a href="{% url 'account:my_profile' %}">Редактировать профиль</a></li>
-            {% endif %}
-
+            <li class="nav-item"><a class="nav-link" href="{% url 'posts_list_csv' %}">Выгрузка постов в CSV</a></li>
+            <li><a href="{% url 'account:my_profile' %}">Аккаунт</a>
 
         </ul>
     </nav>
 </aside>
-
 <main>
     {% block content %}{% endblock %}
 </main>

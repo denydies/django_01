@@ -5,22 +5,22 @@
 {% endblock %}
 {% block content%}
 
-    <div class="content">
+<div class="content">
 
-        <h1>Посты</h1>
-        <hr>
+    <h1>Посты</h1>
+    <hr>
 
-        {% for post in post_list %}
-            <div class="payload">
-                <br>
-                <h4>
-                    <a href="{% url 'post_show' post_id=post.id %}">{{ post.title }}</a>
-                </h4>
-                <p>{{ post.content }}</p>
-            </div>
-            <hr>
-            {% endfor %}
-
+    {% for post in post_list %}
+    <div class="payload">
+        <br>
+        <h4>
+            <a href="{% url 'post_show' post_id=post.id %}">{{ post.title }}</a>
+        </h4>
+        <p>{{ post.content }}</p>
     </div>
+    <hr>
+    {% endfor %}
+
+</div>
 
 {% endblock%}

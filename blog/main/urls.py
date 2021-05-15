@@ -14,9 +14,14 @@ urlpatterns = [
 
     path('posts/', views.posts, name='posts'),
     path('posts/list/', views.PostsListView.as_view(), name='posts_list'),
+    path('posts/list/csv/', views.PostXLSX.as_view(), name='posts_list_csv'),
     path('posts/create/', views.post_create, name='posts_create'),
     path('post/<int:post_id>/', views.post_show, name='post_show'),
     path('post/update/<int:post_id>/', views.post_update, name='post_update'),
+
+    path('post/delete/<int:post_id>/', views.post_delete, name='post_delete'),
+    # path('post/<int:post_id>/delete/', views.PostDeleteView.as_view(), name='post_delete'),
+
     path('comments/', views.comments, name='comments'),
     path('comment/create/', views.comment_create, name='comment_create'),
 
