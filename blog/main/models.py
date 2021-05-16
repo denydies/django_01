@@ -10,6 +10,7 @@ class Author(models.Model):
     name = models.CharField('Имя автора', max_length=100, null=True)
     # last_name = models.CharField('Фамилия автора', max_length=100, null=True)
     email = models.EmailField('Email автора', max_length=50, null=True)
+    age = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name
@@ -70,6 +71,11 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.content_com
+
+
+class Book(models.Model):
+    title = models.CharField('Название книги', max_length=250)
+    author = models.ForeignKey(Author, models.CASCADE, related_name='books')
 
 
 # class Logger(models.Model):

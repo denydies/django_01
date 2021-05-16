@@ -8,7 +8,7 @@ from django.views import View
 from faker import Faker
 
 from .forms import PostForm, SubscriberForm, CommentForm
-from .models import Post, Author, Subscriber, Comment, ContactUs
+from .models import Post, Author, Subscriber, Comment, ContactUs, Book
 
 # from .post_service import post_all, post_find
 # from .subscribe_service import subscribe
@@ -75,6 +75,12 @@ def post_update(request, post_id):
     return render(request, 'main/post_update.html', context=context)
 
 
+def post_delete(request, post_id):
+    post = Post.objects.get(id=post_id)
+    post.delete()
+    return render(request, 'main/posts.html')
+
+
 def comment_create(request):
     err = ""
     if request.method == "POST":
@@ -139,8 +145,21 @@ def authors_new(request):
 
 
 def authors_all(request):
-    authors = Author.objects.all()
-    return render(request, 'main/authors.html', {"title": "Authors", "authors": authors})
+    authors = Author.objects.all().prefetch_related('books')
+    context = {
+        "title": "Authors",
+        "authors": authors,
+    }
+    return render(request, 'main/authors.html', context)
+
+
+def books_all(request):
+    books = Book.objects.all().only('id', 'title', 'author__name').select_related('author')
+    context = {
+        "title": "Books",
+        "books": books
+    }
+    return render(request, 'main/books.html', context)
 
 
 def api_posts(request):
@@ -194,17 +213,8 @@ def post_find(post_id: int) -> Post:
 # class BooksListView(ListView):
 #     queryset = Book.objects.all()
 
-from django.views.generic import ListView, CreateView, DeleteView
 
-
-def post_delete(request, post_id):
-    post = Post.objects.get(id=post_id)
-    post.delete()
-    return render(request, 'main/posts.html')
-
-# class PostDeleteView(DeleteView):
-#     success_url = 'posts/'
-#     tamplate_name = 'main/post_delete.html'
+from django.views.generic import ListView, CreateView
 
 
 class PostsListView(ListView):
