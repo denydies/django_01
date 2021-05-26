@@ -74,8 +74,25 @@ class Comment(models.Model):
 
 
 class Book(models.Model):
+    class Meta:
+        verbose_name = "Книга"
+        verbose_name_plural = "Книги"
     title = models.CharField('Название книги', max_length=250)
     author = models.ForeignKey(Author, models.CASCADE, related_name='books')
+
+    def __str__(self):
+        return self.title
+
+
+class Category(models.Model):
+    class Meta:
+        verbose_name = "Категория"
+        verbose_name_plural = "Категории"
+    name = models.CharField('Название категории', max_length=250)
+    book = models.ForeignKey(Book, models.CASCADE, related_name='books')
+
+    def __str__(self):
+        return self.name
 
 
 # class Logger(models.Model):

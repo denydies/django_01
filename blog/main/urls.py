@@ -2,6 +2,8 @@ from django.conf.urls import url
 from django.urls import path
 from django.views.decorators import cache
 from django.views.generic import TemplateView, RedirectView
+from django.conf import settings
+from django.conf.urls.static import static
 
 from . import views
 
@@ -31,6 +33,7 @@ urlpatterns = [
     path('authors/all/', cache.cache_page(60 * 2)(views.authors_all), name='authors_all'),
 
     path('books/all/', views.books_all, name='books_all'),
+    path('categories/all/', views.categories_all, name='categories_all'),
 
     path('api/posts/', views.api_posts, name='api_posts'),
     path('api/post/<int:post_id>/', views.api_post_show, name='api_post_show'),
@@ -42,4 +45,4 @@ urlpatterns = [
     path('contact/us/create/', views.ContactUsView.as_view(), name='contact-us-create'),
     path('contact/us/list/', views.ContactUsListView.as_view(), name='contact-us-list'),
 
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

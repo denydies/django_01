@@ -1,5 +1,9 @@
+#MANAGE = python blog/manage.py
+PROJECT_DIR=$(shell pwd)
+WSGI_PORT=8080
+
 run:
-	 cd blog && python manage.py runserver
+	 cd blog && python manage.py runserver 0.0.0.0:8000
 
 
 make-migrate:
@@ -28,4 +32,11 @@ shell_plus:
 #celery_autoscale:
 #		celery -A blog worker --autoscale=4,2 -l info
 
+gunicorn-run:
+	gunicorn -w 4 -b 0.0.0.0:$(WSGI_PORT) --chdir $(PROJECT_DIR)/blog blog.wsgi --timeout 30 --log-level debug --max-requests 10000
 
+collect-static:
+	python blog/manage.py collectstatic
+
+gunicorn-run-sock:
+	gunicorn -w 4 -b unix:/tmp/gunicorn.sock --chdir $(PROJECT_DIR)/blog blog.wsgi --timeout 30 --log-level debug --max-requests 10000

@@ -8,7 +8,7 @@ from django.views import View
 from faker import Faker
 
 from .forms import PostForm, SubscriberForm, CommentForm
-from .models import Post, Author, Subscriber, Comment, ContactUs, Book
+from .models import Post, Author, Subscriber, Comment, ContactUs, Book, Category
 
 # from .post_service import post_all, post_find
 # from .subscribe_service import subscribe
@@ -160,6 +160,15 @@ def books_all(request):
         "books": books
     }
     return render(request, 'main/books.html', context)
+
+
+def categories_all(request):
+    categories = Category.objects.all().only('name')
+    context = {
+        "title": "Categories",
+        "categories": categories
+    }
+    return render(request, 'main/categories.html', context)
 
 
 def api_posts(request):
