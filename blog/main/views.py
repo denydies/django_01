@@ -228,6 +228,13 @@ from django.views.generic import ListView, CreateView
 
 class PostsListView(ListView):
     queryset = Post.objects.all()
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['cnt'] = context['object_list'].count()
+        context['title'] = 'Все посты'
+        return context
+
     template_name = 'main/posts_list.html'
 
 
