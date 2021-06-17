@@ -4,5 +4,5 @@ exclude=venv,tests/*
 application-import-names=app
 import-order-style=google
 max-complexity=10
-ignore=Q000, D100, D101, D103, D104, D105, D106, E265, W292, I101, E303, F821, F401, E841, A001, F811, I100, E121, E301, E302, I201, D102, D107, I202, I201, E402, E501, D200, D400, D403
+ignore=Q000, D100, D101, D103, D104, D105, D106, E265, W292, I101, E303, F821, F401, E841, A001, F811, I100, E121, E301, E302, I201, D102, D107, I202, I201, E402, E501
 inline-quotes="

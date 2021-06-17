@@ -26,11 +26,11 @@ check-migrate:
 shell_plus:
 	python blog/manage.py shell_plus --print-sql
 
-celery:
-	 cd blog && celery -A blog worker -l info
+#celery:
+	# celery -A blog worker -l info
 #
 #celery_autoscale:
-#	cd blog &&celery -A blog worker --autoscale=4,2 -l info
+#		celery -A blog worker --autoscale=4,2 -l info
 
 gunicorn-run:
 	gunicorn -w 4 -b 0.0.0.0:$(WSGI_PORT) --chdir $(PROJECT_DIR)/blog blog.wsgi --timeout 30 --log-level debug --max-requests 10000
@@ -40,9 +40,3 @@ collect-static:
 
 gunicorn-run-sock:
 	gunicorn -w 4 -b unix:/tmp/gunicorn.sock --chdir $(PROJECT_DIR)/blog blog.wsgi --timeout 30 --log-level debug --max-requests 10000
-
-pytest:
-	cd blog && pytest
-
-test-all-project:
-	cd blog && pytest --cov=main --cov-report=html --cov-fail-under=48
