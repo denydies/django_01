@@ -14,20 +14,6 @@ class Author(models.Model):
 
     def __str__(self):
         return self.name
-    #
-    # def get_full_name(self):
-    #     return f'{self.name} {self.last_name}'
-    #
-    # @property
-    # def full_name(self):
-    #     return f'{self.name} {self.last_name}'
-    #
-    # def save(self, *args, **kwargs):
-    #     print('Author BEFORE save')
-    #     self.name = self.name.lover() + ' [name author]'
-    #     self.email = self.email + ' [ author email]'
-    #     super().save(*args, **kwargs)
-    #     print('Author AFTER save')
 
 
 class Subscriber(models.Model):

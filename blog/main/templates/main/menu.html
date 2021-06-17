@@ -55,8 +55,9 @@
 			</li>
 			<li><a href="{% url 'posts_list' %}">Posts_List</a></li>
 			{% if request.user.is_authenticated %}
-            <li><a href="{% url 'account:my_profile' %}">Редактировать профиль</a></li>
+            	<li><a href="{% url 'account:my_profile' %}">Редактировать профиль</a></li>
             {% endif %}
+			<li><a href="{% url 'account:sign_up' %}">Регистрация</a></li>
 
 		</ul>
 	</nav>
