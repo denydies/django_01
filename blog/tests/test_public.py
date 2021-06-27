@@ -1,6 +1,6 @@
 from django.urls import reverse
 
-from main.models import ContactUs
+from sport_blog.models import ContactUs
 
 
 def test_home_page(client):
