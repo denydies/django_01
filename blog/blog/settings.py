@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['django', '127.0.0.1']
 
-# Celery config
+# Celery Configuration Options
 CELERY_BROKER_URL = 'amqp://localhost'
 
 CELERY_TIMEZONE = 'Europe/Moscow'
@@ -36,12 +36,12 @@ CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
 
 # celery -A blog beat -l info
-# CELERY_BEAT_SCHEDULE = {
-#     'subscribe_notify_beat': {
-#         'task': 'main.tasks.subscribe_notify_beat',
-#         'schedule': crontab(hour='09')
-#     },
-# }
+CELERY_BEAT_SCHEDULE = {
+    'subscribe_notify_beat': {
+        'task': 'main.tasks.subscribe_notify_beat',
+        'schedule': crontab(hour='09')
+    },
+}
 # APPEND_SLASH = True
 
 # Application definition
@@ -72,8 +72,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 
-    'main.middlewares.SimpleMiddleware',
-    'main.middlewares.MetrikaMiddleware',
+    # 'main.middlewares.SimpleMiddleware',
+    # 'main.middlewares.MetrikaMiddleware',
     # 'main.middlewares.LoggerMiddleware',
 ]
 
@@ -106,7 +106,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # CACHE = {
 #     'default': {
@@ -158,7 +157,6 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = os.path.join(BASE_DIR, '..', 'static_content', 'static')
 
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -168,12 +166,17 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
-# Gmail
+# # GMAIL
+#
+# EMAIL_HOST_USER = 'denistest13@gmail.com'
+# EMAIL_HOST_PASSWORD = '248651973@DIeS'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-EMAIL_HOST_USER = 'denistest13@gmail.com'
-EMAIL_HOST_PASSWORD = '248651973@DIeS'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = "from-admin@sport.com"
+if DEBUG:
+    EMAIL_BACKEND = 'django.blog.mail.backends.console.EmailBackend'
+    DOMAIN = 'http://localhost:8000'
