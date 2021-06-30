@@ -1,4 +1,4 @@
-# from core.sport_blog.models import Author
+# from blog.sport_blog.models import Author
 # from django.http import JsonResponse
 #
 # from django.shortcuts import get_object_or_404, render
