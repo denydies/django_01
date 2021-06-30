@@ -8,4 +8,4 @@ services:
     stdin_open: true
     restart: always
     ports:
-      - "8000:8111"
+      - "8888:8111"

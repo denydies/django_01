@@ -45,4 +45,4 @@ pytest:
 	cd blog && pytest
 
 test-all-project:
-	cd blog && pytest --cov=main --cov-report=html --cov-fail-under=48
+	cd blog && pytest --cov=sport_blog --cov-report=html --cov-fail-under=59

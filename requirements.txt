@@ -3,6 +3,8 @@ amqp==2.6.1
 asgiref==3.3.4
 atomate==0.9.9
 attrs==20.3.0
+automium==0.2.6
+automium-web==0.1.1
 bcrypt==3.2.0
 beautifulsoup4==4.9.3
 billiard==3.6.4.0
@@ -50,7 +52,7 @@ jsonschema==3.2.0
 kiwisolver==1.3.1
 kombu==4.6.11
 latexcodec==2.0.1
-listview==0.1.0
+legacy==0.1.6
 maggma==0.26.0
 MarkupSafe==1.1.1
 matminer==0.6.5

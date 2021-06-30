@@ -26,9 +26,9 @@ SECRET_KEY = 'django-insecure-@gb1+ahs0@lp30(--&c9+ac@7k0+hi*i&!az-m=j44%h$ohcs2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['django', '127.0.0.1']
+ALLOWED_HOSTS = ['django', '127.0.0.1', '0.0.0.0']
 
-# Celery Configuration Options
+# Celery Configuration Options`
 CELERY_BROKER_URL = 'amqp://localhost'
 
 CELERY_TIMEZONE = 'Europe/Moscow'
@@ -38,7 +38,7 @@ CELERY_TASK_TIME_LIMIT = 30 * 60
 # celery -A blog beat -l info
 CELERY_BEAT_SCHEDULE = {
     'subscribe_notify_beat': {
-        'task': 'main.tasks.subscribe_notify_beat',
+        'task': 'sport_blog.tasks.subscribe_notify_beat',
         'schedule': crontab(hour='09')
     },
 }
@@ -56,7 +56,7 @@ INSTALLED_APPS = [
 
     'django_extensions',
     'debug_toolbar',
-    'main',
+    'sport_blog',
     'account',
 ]
 
@@ -72,9 +72,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 
-    # 'main.middlewares.SimpleMiddleware',
-    # 'main.middlewares.MetrikaMiddleware',
-    # 'main.middlewares.LoggerMiddleware',
+    # 'sport_blog.middlewares.SimpleMiddleware',
+    # 'sport_blog.middlewares.MetrikaMiddleware',
+    # 'sport_blog.middlewares.LoggerMiddleware',
 ]
 
 ROOT_URLCONF = 'blog.urls'

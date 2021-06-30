@@ -1,15 +1,14 @@
-import pytest
-
 from account.models import User
-
-from main.models import Post, Category, ContactUs
+import pytest
+from sport_blog.models import Category, ContactUs, Post
 
 
 @pytest.fixture(autouse=True, scope="function")
 def enable_db_access_for_all_tests(db):
-    """
-    give access to DB for all tests
-    """
+    pass
+
+
+""" Give access to DB for all tests."""
 
 
 @pytest.fixture(scope='function')
