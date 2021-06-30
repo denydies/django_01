@@ -24,7 +24,7 @@ jobs:
     - name: Lint with flake8
       run: flake8 .
     - name: Django check
-    - run: python blog/manage.py check
+    - run: python core/manage.py check
     - name: Django check makemigrations
-    - run: blog/manage.py makemigrations --check --dry-run
+    - run: core/manage.py makemigrations --check --dry-run
 
