@@ -14,7 +14,7 @@
     <div class="payload">
         <br>
         <h4>
-           {{ forloop.counter }}) <a href="{% url 'post_show' post_id=post.id %}">{{ post.title }}</a>
+            {{ forloop.counter }}) <a href="{% url 'post_show' post_id=post.id %}">{{ post.title }}</a>
         </h4>
         <p>{{ post.content }}</p>
     </div>

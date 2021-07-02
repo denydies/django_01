@@ -6,11 +6,11 @@
 
 {% block content%}
 
-    <form action="{% url 'contact-us-create' %}" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
+<form action="{% url 'contact-us-create' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
 
-        <button class="btn btn-lg btn-success">Сохранить</button>
-    </form>
+    <button class="btn btn-lg btn-success">Сохранить</button>
+</form>
 
 {% endblock%}

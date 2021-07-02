@@ -11,26 +11,22 @@
     <h1>Все категории</h1>
 
     <div class="payload">
-            <table class="table table-hover">
-                <thead>
-                <tr>
-<!--                    <th scope="col">ID Книги</th>-->
-                    <th scope="col">Категории</th>
-                    <th scope="col">Количество книг</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for сategory in categories %}
-                <tr>
-                    <td>{{ сategory.name }}</td>
-                    <td>{{ сategory.books.count }}</td>
-<!--                    <td>[{{ book.author.name }}]</td>-->
-                </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Категории</th>
+                <th scope="col">Количество книг</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for сategory in categories %}
+            <tr>
+                <td>{{ сategory.name }}</td>
+                <td>{{ сategory.books.count }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
-
-
 {% endblock%}

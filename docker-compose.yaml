@@ -5,16 +5,16 @@ services:
     build: ./nginx
     container_name: nginx
     ports:
-    - "8777:80"
-    - "443:443"
+      - "8777:80"
+      - "443:443"
     depends_on:
       - backend
 
   backend:
     build: .
     container_name: sport_blog-backend
-#    command: python ./src/manage.py runserver 0.0.0.0:8111
-#    command: ./commands/wsgi_${SERVER_MODE}.sh
+    #    command: python ./src/manage.py runserver 0.0.0.0:8111
+    #    command: ./commands/wsgi_${SERVER_MODE}.sh
     command: make ${RUN_COMMAND}
     tty: true
     stdin_open: true
@@ -45,7 +45,7 @@ services:
     env_file:
       - .env
     ports:
-    - "15672:15672"
+      - "15672:15672"
 
   postgres:
     image: postgres:12
@@ -64,7 +64,7 @@ services:
     depends_on:
       - rabbitmq
     volumes:
-    - ./:/srv/project
+      - ./:/srv/project
 
   celerybeat:
     build: .
@@ -76,4 +76,3 @@ services:
       - rabbitmq
     volumes:
       - ./:/srv/project
-

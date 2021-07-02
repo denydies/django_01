@@ -20,7 +20,7 @@
         <br>
         <div class="update link">
             {% if request.user.is_authenticated %}
-            <a href ="{% url 'post_delete' post.id %}" class="btn btn-danger">Удалить статью</a>
+            <a href="{% url 'post_delete' post.id %}" class="btn btn-danger">Удалить статью</a>
             {% endif %}
         </div>
         <br>

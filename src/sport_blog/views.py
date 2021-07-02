@@ -20,19 +20,12 @@ from .tasks import noyify_async
 # def index(request):
 #     return render(request, 'sport_blog/index.html')
 
-
 # def about(request):
 #     return render(request, 'sport_blog/about.html', {"title": "About company"})x
 
-
-def comments(request):
-    all_comments = Comment.objects.all()
-    return render(request, 'sport_blog/comments.html', {"title": "Comments", "comments": all_comments})
-
-
-def posts(request):
-    posts = Post.objects.all()
-    return render(request, 'sport_blog/posts.html', {"title": "Posts", "posts": posts})
+# def posts(request):
+#     posts = Post.objects.all()
+#     return render(request, 'sport_blog/posts.html', {"title": "Posts", "posts": posts})
 
 
 def post_create(request):
@@ -41,7 +34,7 @@ def post_create(request):
         form = PostForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('posts')
+            return redirect('posts_list')
         else:
             err = 'Error on save Post'
     else:
@@ -65,7 +58,7 @@ def post_update(request, post_id):
         form = PostForm(instance=pst, data=request.POST)
         if form.is_valid():
             form.save()
-            return redirect('posts')
+            return redirect('posts_list')
         else:
             err = 'Error on update Post'
     else:
@@ -80,7 +73,12 @@ def post_update(request, post_id):
 def post_delete(request, post_id):
     post = Post.objects.get(id=post_id)
     post.delete()
-    return render(request, 'sport_blog/posts.html')
+    return render(request, 'sport_blog/posts_list.html')
+
+
+def comments(request):
+    all_comments = Comment.objects.all()
+    return render(request, 'sport_blog/comments.html', {"title": "Comments", "comments": all_comments})
 
 
 def comment_create(request):
@@ -173,6 +171,8 @@ def categories_all(request):
     return render(request, 'sport_blog/categories.html', context)
 
 
+# API
+
 def api_posts(request):
     every = Post.objects.all()
     data = list(every.values())
@@ -185,10 +185,6 @@ def api_comments(request):
     data = list(all_comments.values())
 
     return JsonResponse(data, safe=False)
-
-
-def api_post_show(request):
-    pass
 
 
 def api_subscribe(request):
@@ -212,7 +208,7 @@ def api_fake_authors(request):
     return JsonResponse(list(all_fake_authors), safe=False)
 
 
-# вспомагательные функции
+# Вспомагательные функции
 
 def post_find(post_id: int) -> Post:
     return Post.objects.get(id=post_id)

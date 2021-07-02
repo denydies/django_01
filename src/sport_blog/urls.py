@@ -14,9 +14,8 @@ urlpatterns = [
 
     path('', TemplateView.as_view(template_name='sport_blog/index.html'), name='home_page'),
     path('about/', TemplateView.as_view(template_name='sport_blog/about.html'), name='about'),
-
     # path('posts/', views.posts, name='posts'),
-    path('posts/', cache.cache_page(60 * 2)(views.posts), name='posts'),
+    # path('posts/', cache.cache_page(60 * 2)(views.posts), name='posts'),
     path('posts/list/', views.PostsListView.as_view(), name='posts_list'),
     path('posts/list/csv/', views.PostXLSX.as_view(), name='posts_list_csv'),
     path('posts/create/', views.post_create, name='posts_create'),
@@ -36,7 +35,6 @@ urlpatterns = [
     path('categories/all/', views.categories_all, name='categories_all'),
 
     path('api/posts/', views.api_posts, name='api_posts'),
-    path('api/post/<int:post_id>/', views.api_post_show, name='api_post_show'),
     path('api/subscribe/', views.api_subscribe, name='api_subscribe'),
     path('api/authors/', views.api_authors, name='api_authors'),
     path('api/authors/new/', views.api_fake_authors, name='api_authors_new'),
