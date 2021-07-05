@@ -28,10 +28,10 @@ shell_plus:
 	python src/manage.py shell_plus --print-sql
 
 celery:
-	 cd src && celery -A core worker -l info
+	 cd src && celery -A core worker -l INFO
 
 celerybeat:
-	 cd src && celery -A core beat -l info
+	 cd src && celery -A core beat -l INFO
 
 #
 #celery_autoscale:
@@ -55,6 +55,16 @@ test-all-project:
 
 
 # DOCKER COMMANDS
+
+doc-clear:
+	 docker system prune -a
+
+container:
+	docker container ls -a
+
+image:
+	docker image ls -a
+
 ps:
 	docker-compose ps
 
@@ -76,7 +86,7 @@ docker-up:
 
 copy-static:
 	docker exec -it sport_blog-backend python ./src/manage.py collectstatic --noinput
-	docker cp sport_blog-backend:/tmp/static_content/static /tmp/static
+	docker cp sport_blog-backend:/srv/project/static_content/static /tmp/static
 	docker cp /tmp/static nginx:/etc/nginx
 #
 #docker-runserver-breakpoint:

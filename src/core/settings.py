@@ -32,13 +32,15 @@ ALLOWED_HOSTS = ['django', '127.0.0.1', '0.0.0.0']
 # ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(":")
 
 # Celery Configuration Options`
-CELERY_BROKER_URL = 'amqp://localhost'
+# CELERY_BROKER_URL = 'amqp://localhost'
 
-CELERY_BROKER_URL = 'amqp://{0}:{1}@{2}:5672//'.format(
-    os.environ.get('RABBITMQ_DEFAULT_USER', 'guest'),
-    os.environ.get('RABBITMQ_DEFAULT_PASS', 'guest'),
-    os.environ.get('RABBITMQ_DEFAULT_HOST', 'localhost'),
-
+# 'amqp://guest:quest@127.0.0.1:5672'
+CELERY_BROKER_URL = '{0}://{1}:{2}@{3}:{4}//'.format(
+    os.environ.get('MQ_DEFAULT_PROTOCOL', 'amqp'),
+    os.environ.get('MQ_DEFAULT_USER', 'guest'),
+    os.environ.get('MQ_DEFAULT_PASS', 'guest'),
+    os.environ.get('MQ_DEFAULT_HOST', '127.0.0.1'),
+    os.environ.get('MQ_DEFAULT_PORT', '5672'),
 )
 
 CELERY_TIMEZONE = 'Europe/Moscow'
