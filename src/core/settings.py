@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-@gb1+ahs0@lp30(--&c9+ac@7k0+hi*i&!az-m=j44%h$ohcs2
 DEBUG = True
 # DEBUG = os.environ.get('DEBUG_MODE') == '1'
 
-ALLOWED_HOSTS = ['django', '127.0.0.1', '0.0.0.0']
+ALLOWED_HOSTS = ['django', '127.0.0.1', '0.0.0.0', 'localhost']
 # ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(":")
 
 # Celery Configuration Options`
@@ -181,6 +181,9 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(BASE_DIR, '..', 'static_content', 'static')
 # STATIC_ROOT = os.path.join('/tmp', 'static_content', 'static')
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media_content')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -190,18 +193,18 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
-# DEFAULT_FROM_EMAIL = "from-admin@sport.com"
-# if DEBUG:
-#     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-#     DOMAIN = 'http://localhost:8000'
-
+DEFAULT_FROM_EMAIL = "from-admin@sport_blog.com"
 if DEBUG:
-    import socket
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    DOMAIN = 'http://127.0.0.1:8000'
 
-    DEBUG_TOOLBAR_PATCH_SETTINGS = True
-
-    INTERNAL_IPS = ['127.0.0.1']
-    ip = socket.gethostbyname(socket.gethostname())
-    ip = '.'.join(ip.split('.')[:-1])
-    ip = f'{ip}.1'
-    INTERNAL_IPS.append(ip)
+# if DEBUG:
+#     import socket
+#
+#     DEBUG_TOOLBAR_PATCH_SETTINGS = True
+#
+#     INTERNAL_IPS = ['127.0.0.1']
+#     ip = socket.gethostbyname(socket.gethostname())
+#     ip = '.'.join(ip.split('.')[:-1])
+#     ip = f'{ip}.1'
+#     INTERNAL_IPS.append(ip)

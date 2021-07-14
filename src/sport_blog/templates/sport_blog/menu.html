@@ -25,10 +25,18 @@
                     <li><a href="{% url 'contact-us-list' %}">Обратная связь</a>
                 </ul>
             </li>
+             <li><a href="{% url 'account:sign_up' %}"><i class="fas fa-user-plus"></i> Регистрация</a></li>
             {% if request.user.is_authenticated %}
-            <li><a href="{% url 'account:my_profile' %}"><i class="fas fa-user-edit"></i> Редактировать профиль</a></li>
+            <li><a href="#"><i class="fas fa-user-edit"></i> Личный кабинет</a>
+                <ul>
+                    <li><a href="{% url 'account:view_my_profile' %}"> Помотреть профиль</a></li>
+                    <li><a href="{% url 'account:my_profile' %}"> Редактровать профиль</a></li>
+                    <li><a href="{% url 'account:my_profile_avatar_create' %}"> Добавить аватар</a></li>
+                    <li><a href="{% url 'account:my_profile_avatar_list' %}"> Список аватарок</a></li>
+                </ul>
+            </li>
             {% endif %}
-            <li><a href="{% url 'account:sign_up' %}"><i class="fas fa-user-plus"></i> Регистрация</a></li>
+
 
         </ul>
     </nav>
