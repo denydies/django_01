@@ -1,0 +1,18 @@
+{% extends 'sport_blog/base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+{% block content%}
+
+<h1>Комментарии</h1>
+<div>
+    <h1>-----------</h1>
+    {% for i in all %}
+    {{ i.content}}
+    {% endfor %}
+    <h1>-----------</h1>
+</div>
+
+
+{% endblock%}
