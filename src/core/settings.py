@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'sport_blog',
     'account',
+    'rest_framework',
 ]
 
 AUTH_USER_MODEL = 'account.user'
