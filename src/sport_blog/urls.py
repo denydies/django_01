@@ -34,6 +34,7 @@ urlpatterns = [
     path('authors/all/', cache.cache_page(60 * 2)(views.authors_all), name='authors_all'),
 
     path('books/all/', views.books_all, name='books_all'),
+    path('book/list/', views.BooksListView.as_view(), name='book_list'),
     path('categories/all/', views.categories_all, name='categories_all'),
 
     path('api/posts/', views.api_posts, name='api_posts'),

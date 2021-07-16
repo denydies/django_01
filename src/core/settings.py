@@ -71,9 +71,16 @@ INSTALLED_APPS = [
     'sport_blog',
     'account',
     'rest_framework',
+    'drf_yasg',
+    'django_filters',
 ]
 
 AUTH_USER_MODEL = 'account.user'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 3
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
