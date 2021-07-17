@@ -205,6 +205,10 @@ def post_find(post_id: int) -> Post:
 
 # Классовые вью
 
+class AuthorListView(ListView):
+    queryset = Author.objects.all()
+    template_name = 'sport_blog/author_list.html'
+
 
 class BooksListView(FilterView):
     queryset = Book.objects.all()

@@ -32,6 +32,7 @@ urlpatterns = [
     path('authors/new/', views.authors_new, name='authors_new'),
     # path('authors/all/', views.authors_all, name='authors_all'),
     path('authors/all/', cache.cache_page(60 * 2)(views.authors_all), name='authors_all'),
+    path('author/list/', views.AuthorListView.as_view(), name='author_list'),
 
     path('books/all/', views.books_all, name='books_all'),
     path('book/list/', views.BooksListView.as_view(), name='book_list'),
