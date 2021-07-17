@@ -1,7 +1,6 @@
 <h1 align="center">Hi 👋, I'm Denis</h1>
 <h3 align="center">A passionate backend developer from Ukrain</h3>
 <h3 align="center"> The name is project "Sport_blog" </h3>
-![sport_blog](https://user-images.githubusercontent.com/80538140/126048414-1ef948c3-6b96-4da1-a41e-4c62fb7a15a0.png)
 
 <p>This is an educational project that I did on the "Python advanced" course from the IT school Hillel,
 course teacher Roman Romadin -> (https://online.ithillel.ua/ua/coaches/roman-romadin).</p>
