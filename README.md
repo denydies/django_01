@@ -2,8 +2,6 @@
 <h3 align="center">A passionate backend developer from Ukrain</h3>
 <h3 align="center"> The name is project "Sport_blog" </h3>
 ![sport_blog](https://user-images.githubusercontent.com/80538140/126048414-1ef948c3-6b96-4da1-a41e-4c62fb7a15a0.png)
-![sport_blog2](https://user-images.githubusercontent.com/80538140/126048415-41a9d090-59e4-4561-b3d6-fea0f4c4b1c7.png)
-![sport_blog3 png](https://user-images.githubusercontent.com/80538140/126048417-0f5a7057-859e-4446-98e6-ae36fc8ff50f.png)
 
 <p>This is an educational project that I did on the "Python advanced" course from the IT school Hillel,
 course teacher Roman Romadin -> (https://online.ithillel.ua/ua/coaches/roman-romadin).</p>
