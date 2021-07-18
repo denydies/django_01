@@ -47,5 +47,7 @@ urlpatterns = [
     path('contact/us/create/', views.ContactUsView.as_view(), name='contact-us-create'),
     path('contact/us/list/', views.ContactUsListView.as_view(), name='contact-us-list'),
 
-    path('api/v1/', include('api.urls'))
+    path('api/v1/', include('api.urls')),
+
+    path('posts_page/', TemplateView.as_view(template_name='sport_blog/posts_page.html'), name='posts_page')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
