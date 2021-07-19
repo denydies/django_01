@@ -1,19 +1,21 @@
 from django.conf import settings
 from django.conf.urls import url
 from django.conf.urls.static import static
-from django.urls import path
+from django.urls import include, path
 from django.views.decorators import cache
 from django.views.generic import RedirectView, TemplateView
 
 from . import views
 
 urlpatterns = [
-    # path('', views.index, name='home_page'),
-    # path('about', views.about, name='about'),
     url(r'^favicon\.ico$', RedirectView.as_view(url='/sport_blog/static/assets/img/favicon/favicon.ico')),
 
     path('', TemplateView.as_view(template_name='sport_blog/index.html'), name='home_page'),
     path('about/', TemplateView.as_view(template_name='sport_blog/about.html'), name='about'),
+    path('end/registration/',
+         TemplateView.as_view(template_name='sport_blog/thanks_for_activation.html'),
+         name='end_registration'),
+
     # path('posts/', views.posts, name='posts'),
     # path('posts/', cache.cache_page(60 * 2)(views.posts), name='posts'),
     path('posts/list/', views.PostsListView.as_view(), name='posts_list'),
@@ -30,8 +32,10 @@ urlpatterns = [
     path('authors/new/', views.authors_new, name='authors_new'),
     # path('authors/all/', views.authors_all, name='authors_all'),
     path('authors/all/', cache.cache_page(60 * 2)(views.authors_all), name='authors_all'),
+    path('author/list/', views.AuthorListView.as_view(), name='author_list'),
 
     path('books/all/', views.books_all, name='books_all'),
+    path('book/list/', views.BooksListView.as_view(), name='book_list'),
     path('categories/all/', views.categories_all, name='categories_all'),
 
     path('api/posts/', views.api_posts, name='api_posts'),
@@ -43,4 +47,7 @@ urlpatterns = [
     path('contact/us/create/', views.ContactUsView.as_view(), name='contact-us-create'),
     path('contact/us/list/', views.ContactUsListView.as_view(), name='contact-us-list'),
 
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    path('api/v1/', include('api.urls')),
+
+    path('posts_page/', TemplateView.as_view(template_name='sport_blog/posts_page.html'), name='posts_page')
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -6,26 +6,15 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import CreateView, ListView
+from django_filters.views import FilterView
 from faker import Faker
 
+from .filrers import BookFilter, PostFilter
 from .forms import CommentForm, PostForm, SubscriberForm
 
 from .models import Author, Book, Category, Comment, ContactUs, Post, Subscriber
 
-# from .post_service import post_all, post_find
-# from .subscribe_service import subscribe
 from .tasks import noyify_async
-
-
-# def index(request):
-#     return render(request, 'sport_blog/index.html')
-
-# def about(request):
-#     return render(request, 'sport_blog/about.html', {"title": "About company"})x
-
-# def posts(request):
-#     posts = Post.objects.all()
-#     return render(request, 'sport_blog/posts.html', {"title": "Posts", "posts": posts})
 
 
 def post_create(request):
@@ -216,21 +205,47 @@ def post_find(post_id: int) -> Post:
 
 # Классовые вью
 
+class AuthorListView(ListView):
+    queryset = Author.objects.all()
+    template_name = 'sport_blog/author_list.html'
 
-# class BooksListView(ListView):
-#     queryset = Book.objects.all()
 
-
-class PostsListView(ListView):
-    queryset = Post.objects.all()
+class BooksListView(FilterView):
+    queryset = Book.objects.all()
+    filterset_class = BookFilter
+    paginate_by = 10
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
+        context['get_params'] = '&'.join(
+            f'{key}={val}'
+            for key, val in self.request.GET.items()
+            if key != 'page'
+        )
+        context['cnt'] = context['object_list'].count()
+        context['title'] = 'Все книги'
+        return context
+
+    template_name = 'sport_blog/book_list.html'
+
+
+class PostsListView(FilterView):
+    queryset = Post.objects.all()
+    filterset_class = PostFilter
+    paginate_by = 2
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['get_params'] = '&'.join(
+            f'{key}={val}'
+            for key, val in self.request.GET.items()
+            if key != 'page'
+        )
         context['cnt'] = context['object_list'].count()
         context['title'] = 'Все посты'
         return context
 
-    template_name = 'sport_blog/posts_list.html'
+    template_name = 'sport_blog/posts_filter.html'
 
 
 class ContactUsListView(ListView):

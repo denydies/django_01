@@ -9,8 +9,10 @@
 <form method="POST">
     {% csrf_token %}
     {{ form.as_p }}
-
-    <button class="btn btn-lg btn-success">Сохранить</button>
+    <a href="#"></a>
+<!--    <a href="#" class="btn btn-info" role="button">Link Button</a>-->
+    <button class="btn btn-lg btn-primary"> Изменить пароль </a></button>
+    <button class="btn btn-lg btn-success"> Сохранить </button>
 </form>
 
 {% endblock%}

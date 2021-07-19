@@ -1,3 +1,4 @@
+from account.models import Avatar
 from account.models import User
 from account.tasks import send_email_with_activation_link
 
@@ -35,4 +36,20 @@ class UserRegistrationForm(forms.ModelForm):
         # send_email_with_activation_link.delay(instance.id)
         send_email_with_activation_link.apply_async(args=[instance.id], countdown=10)
 
+        return instance
+
+
+class AvatarForm(forms.ModelForm):
+    class Meta:
+        model = Avatar
+        fields = ('file_path',)
+
+    def __init__(self, request, *args, **kwargs):
+        self.request = request
+        super().__init__(*args, **kwargs)
+
+    def save(self, commit=False):
+        instance = super().save(commit=False)
+        instance.user = self.request.user
+        instance.save()
         return instance

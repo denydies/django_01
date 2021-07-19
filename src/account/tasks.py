@@ -15,5 +15,5 @@ def send_email_with_activation_link(user_id):
         body,
         settings.DEFAULT_FROM_EMAIL,
         [user.email],
-        fail_silently=False
+        fail_silently=False,
     )
